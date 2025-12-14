@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Helper AI Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #1e2128;
+      --bg-dark: #181a20;
+      --card: #2a2f3a;
+      --accent: #4f8cff;
+      --text: #e6e8ee;
+      --muted: #9aa0b4;
+      --premium: #f5c451;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .topbar {
+      background: var(--bg-dark);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #2c3140;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .premium-btn {
+      background: var(--premium);
+      color: #000;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      margin: 16px 0;
+      font-size: 20px;
+    }
+
+    .server-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .server-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .server-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .plugin {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .enable-btn {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="brand">🤖 <span>Helper</span> AI</div>
+    <div class="premium-btn">👑 Premium</div>
+  </div>
+
+  <div class="container">
+
+    <h2>Select a Server</h2>
+    <div class="server-grid">
+      <div class="server-card">
+        <strong>My Discord Server</strong>
+        <button class="server-btn">Manage</button>
+      </div>
+    </div>
+
+    <h2 style="margin-top:30px;">Modules</h2>
+
+    <div class="plugin">
+      <div>
+        <strong>Welcome Messages</strong>
+        <div style="font-size:13px;color:#9aa0b4;">Greets new members</div>
+      </div>
+      <button class="enable-btn">Enable</button>
+    </div>
+
+    <div class="plugin">
+      <div>
+        <strong>Levels & XP</strong>
+        <div style="font-size:13px;color:#9aa0b4;">Mee6-style leveling</div>
+      </div>
+      <button class="enable-btn">Enable</button>
+    </div>
+
+    <div class="plugin">
+      <div>
+        <strong>Tickets + AI Support</strong>
+        <div style="font-size:13px;color:#9aa0b4;">Gemini-powered support bot</div>
+      </div>
+      <button class="enable-btn">Enable</button>
+    </div>
+
+    <div class="plugin">
+      <div>
+        <strong>Fun & Games</strong>
+        <div style="font-size:13px;color:#9aa0b4;">Memes, trivia, games</div>
+      </div>
+      <button class="enable-btn">Enable</button>
+    </div>
+
+  </div>
+
+</body>
+  </html>
