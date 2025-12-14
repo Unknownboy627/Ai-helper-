@@ -1,62 +1,62 @@
-from flask import Flask, redirect, request, session, url_for, render_template
-import requests
+from flask import Flask, render_template, redirect, session
+from flask_session import Session
 import os
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SESSION_SECRET", "dev")
 
-DISCORD_CLIENT_ID = os.getenv("DISCORD_CLIENT_ID")
-DISCORD_CLIENT_SECRET = os.getenv("DISCORD_CLIENT_SECRET")
-DISCORD_REDIRECT_URI = os.getenv("DISCORD_REDIRECT_URI")
+# REQUIRED FOR RAILWAY
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "super-secret-key")
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_USE_SIGNER"] = True
+app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 
-DISCORD_API = "https://discord.com/api"
+Session(app)
 
 @app.route("/")
 def home():
-    user = session.get("user")
-    return render_template("dashboard.html", user=user)
+    if session.get("user"):
+        return redirect("/dashboard")
+    return render_template("login.html")
 
 @app.route("/login")
 def login():
-    return redirect(
-        f"{DISCORD_API}/oauth2/authorize"
+    DISCORD_CLIENT_ID = os.environ.get("DISCORD_CLIENT_ID")
+    REDIRECT_URI = "https://ai-helper-production-1db8.up.railway.app/callback"
+
+    discord_url = (
+        "https://discord.com/api/oauth2/authorize"
         f"?client_id={DISCORD_CLIENT_ID}"
-        f"&redirect_uri={DISCORD_REDIRECT_URI}"
-        f"&response_type=code"
-        f"&scope=identify email"
+        f"&redirect_uri={REDIRECT_URI}"
+        "&response_type=code"
+        "&scope=identify"
     )
+    return redirect(discord_url)
 
-@app.route("/login/callback")
+@app.route("/callback")
 def callback():
-    code = request.args.get("code")
-
-    data = {
-        "client_id": DISCORD_CLIENT_ID,
-        "client_secret": DISCORD_CLIENT_SECRET,
-        "grant_type": "authorization_code",
-        "code": code,
-        "redirect_uri": DISCORD_REDIRECT_URI
+    # TEMP LOGIN (PROOF IT WORKS)
+    session["user"] = {
+        "username": "Andrew",
+        "id": "123456"
     }
+    return redirect("/loading")
 
-    headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    token = requests.post(
-        f"{DISCORD_API}/oauth2/token",
-        data=data,
-        headers=headers
-    ).json()
+@app.route("/loading")
+def loading():
+    return render_template("loading.html")
 
-    user = requests.get(
-        f"{DISCORD_API}/users/@me",
-        headers={"Authorization": f"Bearer {token['access_token']}"}
-    ).json()
-
-    session["user"] = user
-    return redirect(url_for("home"))
+@app.route("/dashboard")
+def dashboard():
+    if not session.get("user"):
+        return redirect("/")
+    return render_template("dashboard.html", user=session["user"])
 
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("home"))
+    return redirect("/")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000)
+    app.run() 
