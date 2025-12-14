@@ -6,21 +6,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #1e2128;
-      --bg-dark: #181a20;
-      --card: #2a2f3a;
-      --accent: #4f8cff;
-      --text: #e6e8ee;
-      --muted: #9aa0b4;
-      --premium: #f5c451;
+      --bg: #0b0b0d;
+      --bg-dark: #070708;
+      --card: #151518;
+      --gold: #f5c451;
+      --gold-soft: rgba(245,196,81,0.15);
+      --text: #f2f2f2;
+      --muted: #a0a0a0;
     }* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: var(--bg);
+  background: linear-gradient(180deg, #000 0%, #0b0b0d 100%);
   color: var(--text);
 }
+
+a { text-decoration: none; color: inherit; }
 
 /* Top Bar */
 .topbar {
@@ -29,7 +31,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #2c3140;
+  border-bottom: 1px solid #1f1f24;
 }
 
 .brand {
@@ -38,10 +40,7 @@ body {
   gap: 10px;
   font-weight: 700;
   font-size: 18px;
-}
-
-.brand span {
-  color: var(--accent);
+  color: var(--gold);
 }
 
 .top-actions {
@@ -50,25 +49,38 @@ body {
   gap: 12px;
 }
 
-.premium-btn {
-  background: var(--premium);
-  color: #000;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 13px;
+.btn {
+  padding: 8px 14px;
+  border-radius: 10px;
   font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
 }
 
-.avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #555;
+.btn-gold {
+  background: var(--gold);
+  color: #000;
+}
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(245,196,81,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+}
+
+.btn-outline:hover {
+  background: var(--gold-soft);
 }
 
 /* Layout */
 .container {
-  padding: 20px;
+  padding: 22px;
   max-width: 1200px;
   margin: auto;
 }
@@ -76,6 +88,7 @@ body {
 h2 {
   margin: 10px 0 16px;
   font-size: 20px;
+  color: var(--gold);
 }
 
 /* Server Grid */
@@ -87,12 +100,13 @@ h2 {
 
 .server-card {
   background: var(--card);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  border: 1px solid #1f1f24;
 }
 
 .server-header {
@@ -105,7 +119,7 @@ h2 {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #444;
+  background: #222;
 }
 
 .server-name {
@@ -118,17 +132,6 @@ h2 {
   color: var(--muted);
 }
 
-.server-btn {
-  margin-top: auto;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 8px 0;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 /* Plugins */
 .plugin-list {
   display: flex;
@@ -138,22 +141,13 @@ h2 {
 
 .plugin {
   background: var(--card);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
-
-.plugin-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.plugin-title {
-  font-weight: 600;
+  border: 1px solid #1f1f24;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
 }
 
 .plugin-desc {
@@ -161,109 +155,78 @@ h2 {
   color: var(--muted);
 }
 
-.plugin-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.premium-tag {
-  background: rgba(245,196,81,0.15);
-  color: var(--premium);
-  padding: 4px 8px;
-  border-radius: 12px;
+.tag {
+  background: var(--gold-soft);
+  color: var(--gold);
+  padding: 4px 10px;
+  border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
 }
 
-.enable-btn {
-  background: transparent;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
 /* Mobile */
 @media (max-width: 600px) {
-  .topbar { padding: 12px; }
   h2 { font-size: 18px; }
 }
 
   </style>
 </head>
-<body>  <!-- Top Bar -->  <div class="topbar">
-    <div class="brand">🤖 <span>Andy</span> AI</div>
+<body>  <div class="topbar">
+    <div class="brand">👑 Andy AI</div>
     <div class="top-actions">
-      <div class="premium-btn">👑 Premium</div>
-      <div class="avatar"></div>
+      {% if user %}
+        <a class="btn btn-outline" href="/logout">Logout</a>
+      {% else %}
+        <a class="btn btn-gold" href="/login">Login with Discord</a>
+      {% endif %}
     </div>
-  </div>  <div class="container"><!-- Servers -->
-<h2>Select a server</h2>
+  </div>  <div class="container">{% if user %}
+<h2>Welcome, {{ user.username }}</h2>
+
+<h2>Your Servers</h2>
 <div class="server-grid">
   <div class="server-card">
     <div class="server-header">
       <div class="server-icon"></div>
       <div>
-        <div class="server-name">Elite Army Moderators</div>
+        <div class="server-name">Example Server</div>
         <div class="server-role">Owner</div>
       </div>
     </div>
-    <button class="server-btn">Go</button>
-  </div>
-
-  <div class="server-card">
-    <div class="server-header">
-      <div class="server-icon"></div>
-      <div>
-        <div class="server-name">The Gamers Hangout</div>
-        <div class="server-role">Owner</div>
-      </div>
-    </div>
-    <button class="server-btn">Go</button>
+    <a class="btn btn-gold" href="#">Open</a>
   </div>
 </div>
 
-<!-- Plugins -->
 <h2 style="margin-top:30px;">Plugins</h2>
 <div class="plugin-list">
 
   <div class="plugin">
-    <div class="plugin-info">
-      <div class="plugin-title">Welcome & Goodbye</div>
-      <div class="plugin-desc">Automatically greet new members and say goodbye.</div>
+    <div>
+      <strong>AI Chat</strong>
+      <div class="plugin-desc">Chat with Andy AI using OpenAI</div>
     </div>
-    <div class="plugin-actions">
-      <div class="premium-tag">Premium</div>
-      <button class="enable-btn">Enable</button>
-    </div>
-  </div>
-
-  <div class="plugin">
-    <div class="plugin-info">
-      <div class="plugin-title">Reaction Roles</div>
-      <div class="plugin-desc">Let users get roles by reacting to messages.</div>
-    </div>
-    <div class="plugin-actions">
-      <div class="premium-tag">Premium</div>
-      <button class="enable-btn">Enable</button>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <span class="tag">Free</span>
+      <button class="btn btn-outline">Enable</button>
     </div>
   </div>
 
   <div class="plugin">
-    <div class="plugin-info">
-      <div class="plugin-title">Levels</div>
-      <div class="plugin-desc">XP, leveling, and leaderboards.</div>
+    <div>
+      <strong>Ticket Support AI</strong>
+      <div class="plugin-desc">Gemini-powered auto support replies</div>
     </div>
-    <div class="plugin-actions">
-      <div class="premium-tag">Premium</div>
-      <button class="enable-btn">Enable</button>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <span class="tag">Premium</span>
+      <button class="btn btn-gold">Upgrade</button>
     </div>
   </div>
 
 </div>
 
+{% else %}
+  <h2>Please login to access your dashboard</h2>
+{% endif %}
+
   </div></body>
-  </html>
+                                                                  </html>
